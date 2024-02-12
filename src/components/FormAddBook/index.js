@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, Button, StyleSheet, TextInput, ScrollView, Switch, Alert } from "react-native";
 import ImagePicker from "react-native-image-crop-picker";
 import { SelectList } from 'react-native-dropdown-select-list';
@@ -7,7 +7,7 @@ import AddPhoto from "../AddPhoto";
 
 const FormAddBook = ({ submitBook, updateBook, hasBook }) => {
     const { form, setForm } = React.useContext(CurrentFormContext)
-    const [isSuccess, setIsSuccess] = useState(null)
+
 
     const data = [
         { key: '1', value: 'Ficción' },
@@ -21,6 +21,7 @@ const FormAddBook = ({ submitBook, updateBook, hasBook }) => {
         { key: '10', value: 'Cocina' },
         { key: '11', value: 'Historia' },
         { key: '12', value: 'Biografías y memorias' },
+        { key: '13', value: 'Manga' },
     ];
 
     const handleAddPhoto = () => {
@@ -42,21 +43,13 @@ const FormAddBook = ({ submitBook, updateBook, hasBook }) => {
             } else {
                 await submitBook()
             }
-            setIsSuccess(true)
-            setForm({})
         } catch (error) {
             setIsSuccess(false)
             console.error("Error al subir el libro:", error)
         }
     };
 
-    const showAlert = () => {
-        if (isSuccess === true) {
-            Alert.alert("Éxito", "El libro se ha subido correctamente", [{ text: "OK", onPress: () => setIsSuccess(null) }])
-        } else if (isSuccess === false) {
-            Alert.alert("Error", "Hubo un problema al subir el libro. Por favor, inténtalo de nuevo.", [{ text: "OK", onPress: () => setIsSuccess(null) }])
-        }
-    }
+ 
 
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -129,7 +122,7 @@ const FormAddBook = ({ submitBook, updateBook, hasBook }) => {
                     title={hasBook ? "Actualizar libro" : "Subir Libro"}
                     onPress={handleSubmission}
                 />
-                {showAlert()}
+              
             </View>
         </ScrollView>
     );

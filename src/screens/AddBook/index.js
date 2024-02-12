@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, View } from "react-native";
+import { SafeAreaView, View, Alert } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import GradientBg from "../../components/GradientBg";
 import FormAddBook from "../../components/FormAddBook";
@@ -16,6 +16,7 @@ const AddBook = () => {
         description: "",
         read: false,
     })
+    const [isSuccess, setIsSuccess] = React.useState(null)
 
     const route = useRoute();
     const  id  = route?.params?.id
@@ -34,7 +35,13 @@ const AddBook = () => {
             getBookById()
         }
     }, [])
-    
+    const showAlert = () => {
+      if (isSuccess === true) {
+          Alert.alert("Éxito", "El libro se ha subido correctamente", [{ text: "OK", onPress: () => setIsSuccess(null) }])
+      } else if (isSuccess === false) {
+          Alert.alert("Error", "Hubo un problema al subir el libro. Por favor, inténtalo de nuevo.", [{ text: "OK", onPress: () => setIsSuccess(null) }])
+      }
+  }
     const validateFields = () => {
         if (form.title === "") {
           alert('El campo titulo es requerido')
@@ -60,6 +67,8 @@ const AddBook = () => {
           alert('El campo descripcion es requerido')
           return false
         }
+        setIsSuccess(true)
+        setForm({})
         return true
   }
     const submitFormToAPI = async (formData) => {
@@ -134,6 +143,7 @@ const AddBook = () => {
             <View>
                 <CurrentFormContext.Provider value={{form,setForm}} >
                     <FormAddBook submitBook={handleSubmit} updateBook={handleUpdateBook} hasBook={hasBook}/>
+                    {showAlert()}
                 </CurrentFormContext.Provider>
             </View>
         </GradientBg>
