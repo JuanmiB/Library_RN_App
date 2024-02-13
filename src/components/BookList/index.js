@@ -68,28 +68,6 @@ const BookList = () => {
                             </TouchableOpacity>
                         </View>
                     
-                        {/* <FlatList
-                            refreshing={false}
-                            onRefresh={getBooks}
-                            data={books}
-                            keyExtractor={(item) => item.id}
-                            numColumns={2}
-                            showsVerticalScrollIndicator={false}
-                            scrollEnabled={true}
-                            columnWrapperStyle={styles.columnWrapper}
-                            renderItem={({ item: books }) => (
-                                <BookCard book={books} />
-                            )}
-                        />
-
-                        <View style={styles.containerAbsolute}>
-                            <TouchableOpacity
-                                style={styles.containerRelative}
-                                onPress={() => navigation.navigate("AddBook")}
-                            >
-                                <Text style={styles.addButton}>+</Text>
-                            </TouchableOpacity>
-                        </View> */}
                     </>
                 )
             }

@@ -5,11 +5,11 @@ import GradientBg from "../../components/GradientBg";
 
 const Home = () => {
     const openGithub = () => {
-        Linking.openURL("https://github.com/tuusuario")
+        Linking.openURL("https://github.com/")
     };
 
     const openLinkedIn = () => {
-        Linking.openURL("https://www.linkedin.com/in/tuperfil/")
+        Linking.openURL("https://www.linkedin.com/in/")
     };
 
     return (
